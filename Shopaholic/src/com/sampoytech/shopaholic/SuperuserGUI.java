@@ -10,7 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.bind.ParseConversionEvent;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -20,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class SuperuserGUI {
 
@@ -32,8 +38,10 @@ public class SuperuserGUI {
 	private JTextField txtNumber;
 	private JTextField txtHyper;
 	private JTable table;
-
 	static String log;
+	
+	UserConnection uc=new UserConnection();
+	ArrayList<User> user=uc.userLister();
 	/**
 	 * Launch the application.
 	 */
@@ -166,6 +174,7 @@ public class SuperuserGUI {
 		txtNumber.setColumns(10);
 		
 		JComboBox AccCombo = new JComboBox();
+		AccCombo.setModel(new DefaultComboBoxModel(new String[] {"Super User", "Seller", "Customer"}));
 		AccCombo.setMaximumRowCount(3);
 		AccCombo.setBounds(710, 19, 186, 32);
 		frame.getContentPane().add(AccCombo);
@@ -199,6 +208,7 @@ public class SuperuserGUI {
 		lblLog.setText("welcome User:"+log);
 		
 		table = new JTable();
+		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -208,11 +218,23 @@ public class SuperuserGUI {
 		table.setBounds(21, 25, 315, 483);
 		frame.getContentPane().add(table);
 		
-		UserConnection uc=new UserConnection();
-		ArrayList<User> user=uc.userLister();
-		//Vector<?> data = new Vector<>();
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		    
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				txtId.setText(user.get(table.getSelectedRow()+1).getId());
+				txtUsername.setText(user.get(table.getSelectedRow()+1).getUsername());
+				txtPassword.setText(user.get(table.getSelectedRow()+1).getPassword());
+				txtName.setText( user.get(table.getSelectedRow()+1).getName());
+				txtSurname.setText(user.get(table.getSelectedRow()+1).getSurname());
+				txtHyper.setText(user.get(table.getSelectedRow()+1).getAddress());
+				txtNumber.setText(user.get(table.getSelectedRow()+1).getNumber());
+				AccCombo.setSelectedIndex((Integer.valueOf(user.get(table.getSelectedRow()+1).getAccessLevel()))-1);
+			}
+		});
+		
 		DefaultTableModel model = new DefaultTableModel();
-		//txtName.setText(user.get(2).getName());
 		model.addColumn("ID");
 		model.addColumn("Name");
 		model.addColumn("surname");
@@ -227,6 +249,7 @@ public class SuperuserGUI {
 		}
 		
 		table.setModel(model);
+		
 		
 		
 		
