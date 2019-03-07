@@ -77,9 +77,11 @@ public class LoginGUI {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				LoginChecker lc=new LoginChecker();
-				lc.setUsername(username.getText());
-				lc.setPassword(password.getText());
+				User u=new User();
+				u.setUsername(username.getText());
+				u.setPassword(password.getText());
+				LoginChecker lc=new LoginChecker(u);
+				
 				String[] a= {};
 				try 
 				{
@@ -97,13 +99,10 @@ public class LoginGUI {
 				}
 				switch (a[3]) {
 				case "1":
-					try {
-						SuperuserGUI su=new SuperuserGUI();
-						su.main(null);
-					} catch (URISyntaxException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					
+						//SuperuserGUI su=new SuperuserGUI(a[1]);
+						SuperuserGUI.main(null,a[1]);
+					
 					break;
 				case "2":
 					

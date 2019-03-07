@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserConnection {
 	
@@ -19,24 +21,42 @@ public class UserConnection {
 	File fileT=new File(tempF);
 	public UserConnection()
 	{}
-	public UserConnection(String id,String username,String password,String name,
-			String surname,String accessLevel,String number,String address) 
+	public UserConnection(User u) 
 	{
-		this.id=id;
-		this.username=username;
-		this.password=password;
-		this.name=name;
-		this.surname=surname;
-		this.accessLevel=accessLevel;
-		this.number=number;
-		this.address=address;
+		this.id=u.getId();
+		this.username=u.getUsername();
+		this.password=u.getPassword();
+		this.name=u.getName();
+		this.surname=u.getSurname();
+		this.accessLevel=u.getAccessLevel();
+		this.number=u.getNumber();
+		this.address=u.getAddress();
 	}
 	
-	public Boolean userAdder(String id,String username,String password,String name,
-			String surname,String accessLevel,String number,String address) throws IOException 
+	public ArrayList<User> userLister() throws IOException
+	{
+		Scanner sc=new Scanner(file);
+		String temp;
+		ArrayList<User> u=new ArrayList<User>();
+		u.add(new User());
+		String[][] reader = new String[100][8];
+		int i=0;
+		while(sc.hasNextLine()) 
+		{
+			temp=sc.nextLine();
+			String[] split=temp.split(" ");
+			u.add(new User(split[0],split[1],split[2],split[3],split[4],split[5],
+					split[6],split[7]));
+		}
+		sc.close();
+		return u;
+		
+	}
+	
+	public Boolean userAdder(User u) throws IOException 
 	{
 		BufferedReader br=new BufferedReader(new FileReader(file) );
-		String check = id;
+		String check = u.getId();
 		String currentLine;
 		while((currentLine = br.readLine()) != null) 
 		{
@@ -49,8 +69,8 @@ public class UserConnection {
 		    else
 		    {
 		    	PrintWriter pw=new PrintWriter(new FileWriter(file,true));
-				pw.println(id+" "+username+" "+password+" "+name
-						+" "+surname+" "+accessLevel+" "+number+" "+address);
+				pw.println(u.getId()+" "+u.getUsername()+" "+u.getPassword()+" "+u.getName()
+						+" "+u.getSurname()+" "+u.getPassword()+" "+u.getName()+" "+u.getAddress());
 				pw.close();
 				br.close();
 				return true;
@@ -83,5 +103,6 @@ public class UserConnection {
 		return successful;
 		return false;
 	}
+	
 
 }

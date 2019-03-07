@@ -5,16 +5,21 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 public class SuperuserGUI {
 
@@ -26,17 +31,26 @@ public class SuperuserGUI {
 	private JTextField txtSurname;
 	private JTextField txtNumber;
 	private JTextField txtHyper;
+	private JTable table;
 
+	static String log;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args,String log1) 
+	{
+		log=log1;
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					SuperuserGUI window = new SuperuserGUI();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+					
+				} catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -46,24 +60,28 @@ public class SuperuserGUI {
 	/**
 	 * Create the application.
 	 * @throws URISyntaxException 
+	 * @throws IOException 
 	 */
-	public SuperuserGUI() throws URISyntaxException {
+	public SuperuserGUI() throws URISyntaxException, IOException {
 		initialize();
 	}
+	
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws URISyntaxException 
+	 * @throws IOException 
 	 */
-	private void initialize() throws URISyntaxException {
+	private void initialize() throws URISyntaxException, IOException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 943, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JList list = new JList();
-		list.setBounds(21, 21, 315, 487);
-		frame.getContentPane().add(list);
+		
+		
+		
 		
 		JButton btnAdd = new JButton("Add");
 		btnAdd.setBounds(632, 266, 141, 35);
@@ -159,7 +177,8 @@ public class SuperuserGUI {
 	    btnHyperLink.setOpaque(false);
 	    URI uri = new URI("http://java.sun.com");
 	    
-		btnHyperLink.addActionListener(new ActionListener() {
+		btnHyperLink.addActionListener(new ActionListener() 
+		{
 			public void actionPerformed(ActionEvent arg0) {
 				open(uri);
 			}
@@ -173,6 +192,47 @@ public class SuperuserGUI {
 		txtHyper.setBounds(710, 107, 186, 32);
 		frame.getContentPane().add(txtHyper);
 		txtHyper.setColumns(10);
+		
+		JLabel lblLog = new JLabel("Log");
+		lblLog.setBounds(632, 503, 285, 26);
+		frame.getContentPane().add(lblLog);
+		lblLog.setText("welcome User:"+log);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+			}
+		));
+		table.setBounds(21, 25, 315, 483);
+		frame.getContentPane().add(table);
+		
+		UserConnection uc=new UserConnection();
+		ArrayList<User> user=uc.userLister();
+		//Vector<?> data = new Vector<>();
+		DefaultTableModel model = new DefaultTableModel();
+		//txtName.setText(user.get(2).getName());
+		model.addColumn("ID");
+		model.addColumn("Name");
+		model.addColumn("surname");
+		
+		for (int i = 1; i < user.size(); i++) 
+		{
+			Vector<Object> row = new Vector<Object>(user.size());
+			row.add(user.get(i).getId());
+			row.add(user.get(i).getName());
+			row.add(user.get(i).getSurname());
+			model.addRow(row);
+		}
+		
+		table.setModel(model);
+		
+		
+		
+		
+		
+		
 		
 	}
 

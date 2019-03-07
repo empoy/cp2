@@ -9,18 +9,12 @@ public class LoginChecker {
 	
 	private String username,password;
 	private String loginFile="Login.txt";
-	public LoginChecker()
+	public LoginChecker(User u)
 	{
-		
+		this.username=u.getUsername();
+		this.password=u.getPassword();
 	}
-	public void setPassword(String password) 
-	{
-		this.password=password;
-	}
-	public void setUsername(String username) 
-	{
-		this.username=username;
-	}
+	
 	public String[] check() throws IOException {
 		String[] a={"0"};
 		
