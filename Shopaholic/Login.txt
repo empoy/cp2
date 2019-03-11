@@ -1,4 +1,4 @@
 1 admin admin admin admin 1 6 8
-2 seller seller seller seller 2 7 9
-3 customer customer customer customer 3 7 9
+2 seller seller seller seller 2 2 2
+3 customer customer customer customer 3 3 3
 4 aaaaaaa aaaaaaaa aaaaaaaa aaaaaaaaa 1 1 1

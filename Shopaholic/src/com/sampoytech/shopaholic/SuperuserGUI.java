@@ -5,10 +5,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -42,6 +45,8 @@ public class SuperuserGUI {
 	
 	UserConnection uc=new UserConnection();
 	ArrayList<User> user=uc.userLister();
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -100,6 +105,31 @@ public class SuperuserGUI {
 		frame.getContentPane().add(btnUpdate);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Boolean delete;
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Delete UserId"+txtId.getText()+"?","Warning",dialogButton);
+				if(dialogResult == JOptionPane.YES_OPTION) 
+				{
+					try {
+						if (uc.deleteUser(txtId.getText()))
+						{
+							JOptionPane.showMessageDialog(null, "Successfully Deleted");
+							user=uc.userLister();
+							tableFill();
+							
+						}
+						else
+							JOptionPane.showMessageDialog(null, "Delete Failed");
+					} catch (HeadlessException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
 		btnDelete.setBounds(632, 378, 141, 35);
 		frame.getContentPane().add(btnDelete);
 		
@@ -217,7 +247,6 @@ public class SuperuserGUI {
 		));
 		table.setBounds(21, 25, 315, 483);
 		frame.getContentPane().add(table);
-		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 		    
 			@Override
@@ -230,9 +259,34 @@ public class SuperuserGUI {
 				txtSurname.setText(user.get(table.getSelectedRow()+1).getSurname());
 				txtHyper.setText(user.get(table.getSelectedRow()+1).getAddress());
 				txtNumber.setText(user.get(table.getSelectedRow()+1).getNumber());
+				try {
 				AccCombo.setSelectedIndex((Integer.valueOf(user.get(table.getSelectedRow()+1).getAccessLevel()))-1);
+				}
+				catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
 		});
+		
+		tableFill();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+	public void tableFill()
+	{
+		
+
+		
+		
 		
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("ID");
@@ -249,16 +303,7 @@ public class SuperuserGUI {
 		}
 		
 		table.setModel(model);
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-
 	protected void open(URI uri) {
 		// TODO Auto-generated method stub
 		if (Desktop.isDesktopSupported()) {
