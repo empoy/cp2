@@ -52,6 +52,31 @@ public class UserConnection {
 		return u;
 		
 	}
+	public User userSelect(String id) throws IOException
+	{
+		User u=new User();
+		BufferedReader br=new BufferedReader(new FileReader(file));
+		
+		String currentLine;
+
+		while((currentLine = br.readLine()) != null) 
+		{
+			String[] parts =currentLine.split(" ");
+		    if(parts[0].equals(id)) 
+		    {
+		    u.setId(id);
+		    u.setUsername(parts[1]);
+		    u.setPassword(parts[2]);
+		    u.setName(parts[3]);
+		    u.setSurname(parts[4]);
+		    u.setAccessLevel(parts[5]);
+		    u.setNumber(parts[6]);
+		    u.setAddress(parts[7]);
+		    }
+		}
+		return u;
+		
+	}
 	
 	public Boolean userAdder(User u) throws IOException 
 	{
@@ -80,6 +105,7 @@ public class UserConnection {
 		return null;
 	}
 	
+	
 	public Boolean deleteUser(String id) throws IOException 
 	{
 		BufferedReader br=new BufferedReader(new FileReader(file));
@@ -88,7 +114,8 @@ public class UserConnection {
 		String lineToRemove = id;
 		String currentLine;
 
-		while((currentLine = br.readLine()) != null) {
+		while((currentLine = br.readLine()) != null) 
+		{
 			String[] parts =currentLine.split(" ");
 		    if(parts[0].equals(lineToRemove)) continue;
 		    bw.write(currentLine + System.getProperty("line.separator"));
