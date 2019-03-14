@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Connection {
 	abstract Boolean delete(String id);
-	abstract Boolean update(Object obj);
+	abstract Boolean updateUser(User user);
+	abstract Boolean updateProduct(Product product) ;
 	abstract Boolean adder(Object obj);
-	abstract ArrayList<Object> lister();
+	abstract ArrayList<User> listerUser();
+	abstract ArrayList<Product> listerProduct();
 	abstract Object select(String id);
-	abstract Boolean update(User obj) ;
+	
 }
