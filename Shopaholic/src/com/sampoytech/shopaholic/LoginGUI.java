@@ -106,6 +106,7 @@ public class LoginGUI {
 					
 					break;
 				case "2":
+						SellerGUI.main(null,a[1]);
 					
 					break;
 				case "3":
