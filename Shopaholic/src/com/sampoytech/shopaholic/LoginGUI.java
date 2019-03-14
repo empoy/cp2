@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 import java.awt.Font;
 import javax.swing.JButton;
@@ -59,7 +60,7 @@ public class LoginGUI {
 		frmLogin.getContentPane().add(username);
 		username.setColumns(10);
 		
-		password = new JTextField();
+		password = new JPasswordField();
 		password.setBounds(145, 102, 233, 32);
 		frmLogin.getContentPane().add(password);
 		password.setColumns(10);

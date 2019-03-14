@@ -175,6 +175,7 @@ public class SuperuserGUI {
 		frame.getContentPane().add(lblAddress);
 		
 		txtId = new JTextField();
+		txtId.setEditable(false);
 		txtId.setBounds(425, 19, 186, 32);
 		frame.getContentPane().add(txtId);
 		txtId.setColumns(10);

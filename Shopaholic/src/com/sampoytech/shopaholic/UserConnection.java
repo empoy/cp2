@@ -113,9 +113,7 @@ public class UserConnection {
 		while((currentLine = reader.readLine()) != null) 
 		{
 			String[] parts =currentLine.split(" ");
-		    //parts[field]=value;
-		    
-		    	
+		        		    	
 		    	if(parts[0].equals(select)) 
 		    		writer.write(user.getId()+" "+user.getUsername()+" "+user.getPassword()+" "+user.getName()+" "
 		    				+user.getSurname()+" "+user.getAccessLevel()+" "+user.getNumber()+" "+user.getAddress()+"\n");
