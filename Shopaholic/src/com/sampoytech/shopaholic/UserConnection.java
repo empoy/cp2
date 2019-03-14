@@ -104,5 +104,13 @@ public class UserConnection {
 		return false;
 	}
 	
+	public Boolean updateUser(User user)
+	{
+		
+		
+		return null;
+		
+	}
+	
 
 }
