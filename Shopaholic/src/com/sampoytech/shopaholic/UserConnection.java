@@ -104,11 +104,30 @@ public class UserConnection {
 		return false;
 	}
 	
-	public Boolean updateUser(User user)
+	public Boolean updateUser(User user) throws IOException
 	{
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileT));
+		String select = user.getId();
+		String currentLine;
+		while((currentLine = reader.readLine()) != null) 
+		{
+			String[] parts =currentLine.split(" ");
+		    //parts[field]=value;
+		    
+		    	
+		    	if(parts[0].equals(select)) 
+		    		writer.write(user.getId()+" "+user.getUsername()+" "+user.getPassword()+" "+user.getName()+" "
+		    				+user.getSurname()+" "+user.getAccessLevel()+" "+user.getNumber()+" "+user.getAddress()+"\n");
+		    	else
+		    		writer.write(currentLine + System.getProperty("line.separator"));
+		} 
+		reader.close();
+		writer.close();
+		boolean successful1=file.delete();
+		boolean successful = fileT.renameTo(file);
 		
-		
-		return null;
+		return (successful&&successful1);
 		
 	}
 	

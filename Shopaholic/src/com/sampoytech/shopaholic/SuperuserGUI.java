@@ -101,6 +101,7 @@ public class SuperuserGUI {
 		frame.getContentPane().add(btnAdd);
 		
 		JButton btnUpdate = new JButton("Update");
+		
 		btnUpdate.setBounds(632, 322, 141, 35);
 		frame.getContentPane().add(btnUpdate);
 		
@@ -203,8 +204,8 @@ public class SuperuserGUI {
 		frame.getContentPane().add(txtNumber);
 		txtNumber.setColumns(10);
 		
-		JComboBox AccCombo = new JComboBox();
-		AccCombo.setModel(new DefaultComboBoxModel(new String[] {"Super User", "Seller", "Customer"}));
+		JComboBox<Object> AccCombo = new JComboBox<Object>();
+		AccCombo.setModel(new DefaultComboBoxModel<Object>(new String[] {"Super User", "Seller", "Customer"}));
 		AccCombo.setMaximumRowCount(3);
 		AccCombo.setBounds(710, 19, 186, 32);
 		frame.getContentPane().add(AccCombo);
@@ -270,7 +271,33 @@ public class SuperuserGUI {
 		
 		tableFill();
 		
-		
+		btnUpdate.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				User u=new User();
+				u.setId(txtId.getText());
+				u.setUsername(txtUsername.getText());
+				u.setPassword(txtPassword.getText());
+				u.setName(txtName.getText());
+				u.setSurname(txtSurname.getText());
+				u.setAccessLevel(String.valueOf(AccCombo.getSelectedIndex()+1));
+				u.setNumber(txtNumber.getText());
+				u.setAddress(txtHyper.getText());
+				
+				try {
+					if(uc.updateUser(u))
+					{
+						JOptionPane.showMessageDialog(null, "Successfully Updated");
+						user=uc.userLister();
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				tableFill();
+			}
+		});
 		
 		
 		
