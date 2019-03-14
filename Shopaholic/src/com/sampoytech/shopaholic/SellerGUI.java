@@ -86,5 +86,7 @@ public class SellerGUI {
 		numberTxt.setText(u.getNumber());
 		addressTxt.setText(u.getAddress());
 		
+		Connection c=new ProductConnection();
+		
 	}
 }
