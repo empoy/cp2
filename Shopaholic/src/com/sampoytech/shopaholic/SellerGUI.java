@@ -1,6 +1,7 @@
 package com.sampoytech.shopaholic;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -13,7 +14,9 @@ public class SellerGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args,String log) {
+	static String log;
+	public static void main(String[] args,String logId) {
+		log=logId;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -28,15 +31,17 @@ public class SellerGUI {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public SellerGUI() {
+	public SellerGUI() throws IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 919, 719);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,5 +78,13 @@ public class SellerGUI {
 		JLabel addressTxt = new JLabel("");
 		addressTxt.setBounds(440, 60, 92, 26);
 		frame.getContentPane().add(addressTxt);
+		
+		UserConnection uc=new UserConnection();
+		User u=uc.userSelect(log);
+		nameTxt.setText(u.getName());
+		surnameTxt.setText(u.getSurname());
+		numberTxt.setText(u.getNumber());
+		addressTxt.setText(u.getAddress());
+		
 	}
 }
