@@ -79,14 +79,12 @@ public class SellerGUI {
 		addressTxt.setBounds(440, 60, 92, 26);
 		frame.getContentPane().add(addressTxt);
 		
-		UserConnection uc=new UserConnection();
-		User u=uc.userSelect(log);
+		Connection uc=new UserConnection();
+		User u=uc.selectUser(log);
 		nameTxt.setText(u.getName());
 		surnameTxt.setText(u.getSurname());
 		numberTxt.setText(u.getNumber());
 		addressTxt.setText(u.getAddress());
-		
-	
 		
 	}
 }

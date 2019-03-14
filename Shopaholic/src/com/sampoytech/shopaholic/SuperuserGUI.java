@@ -44,7 +44,7 @@ public class SuperuserGUI {
 	static String log;
 	
 	UserConnection uc=new UserConnection();
-	ArrayList<User> user=uc.userLister();
+	ArrayList<User> user=uc.listerUser();
 	
 	
 	/**
@@ -114,10 +114,10 @@ public class SuperuserGUI {
 				if(dialogResult == JOptionPane.YES_OPTION) 
 				{
 					try {
-						if (uc.deleteUser(txtId.getText()))
+						if (uc.delete(txtId.getText()))
 						{
 							JOptionPane.showMessageDialog(null, "Successfully Deleted");
-							user=uc.userLister();
+							user=uc.listerUser();
 							tableFill();
 							
 						}
@@ -290,7 +290,7 @@ public class SuperuserGUI {
 					if(uc.updateUser(u))
 					{
 						JOptionPane.showMessageDialog(null, "Successfully Updated");
-						user=uc.userLister();
+						user=uc.listerUser();
 					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

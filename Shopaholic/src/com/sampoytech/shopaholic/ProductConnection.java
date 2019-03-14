@@ -1,5 +1,6 @@
 package com.sampoytech.shopaholic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductConnection extends Connection {
@@ -7,6 +8,7 @@ public class ProductConnection extends Connection {
 	@Override
 	Boolean delete(String id) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -23,7 +25,7 @@ public class ProductConnection extends Connection {
 	}
 
 	@Override
-	Boolean adder(Object obj) {
+	Boolean adderUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -40,8 +42,23 @@ public class ProductConnection extends Connection {
 		return null;
 	}
 
+	
+	
+
 	@Override
-	Object select(String id) {
+	Boolean adderProduct(Product product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	User selectUser(String id) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	Product selectProduct(String id) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
