@@ -11,11 +11,7 @@ public class Main {
 		double grade1,grade2,grade3,gpa;
 		
 		
-		System.out.println("1-add student");
-		System.out.println("2-list student");
-		System.out.println("3-delete student");
-		System.out.println("4-update studetn");
-		System.out.println("5-search student");
+		System.out.println("1-add student\n2-list student\n3-delete student\n4-update studetn\n");
 		Scanner sc=new Scanner(System.in);
 		switch (sc.nextInt()) 
 		{
