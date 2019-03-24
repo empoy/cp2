@@ -2,9 +2,7 @@ package com.sampoytech.shopaholic;
 
 import java.awt.EventQueue;
 import java.io.IOException;
-
 import javax.swing.JFrame;
-import javax.swing.JTable;
 import javax.swing.JLabel;
 
 public class SellerGUI {
