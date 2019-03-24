@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 
 import java.util.Scanner;
 
-public class Student 
+public class Student extends Connection
 {
 	private String name,surname,stdId;
 	private double grade1,grade2,grade3,gpa;

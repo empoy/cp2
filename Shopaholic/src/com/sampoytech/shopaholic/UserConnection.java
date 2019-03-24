@@ -176,6 +176,7 @@ private String id,username,password,name,surname,accessLevel,number,address;
 		    u.setAddress(parts[7]);
 		    }
 		}
+		br.close();
 		return u;
 	}
 	@Override

@@ -103,7 +103,7 @@ public class SuperuserGUI {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Boolean delete;
+				//Boolean delete;
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Delete UserId"+txtId.getText()+"?","Warning",dialogButton);
 				if(dialogResult == JOptionPane.YES_OPTION) 
