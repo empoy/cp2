@@ -96,6 +96,9 @@ public class Main {
 			Student s6=new Student();
 			System.out.println(s6.AvgGpa()); 
 			break;
+		default:
+			System.out.println("wrong input");
+			break;
 		}
 		sc.close();
 		
