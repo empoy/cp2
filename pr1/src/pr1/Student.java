@@ -25,16 +25,21 @@ public class Student extends Connection
 	{
 		
 	}
-	public Student(String name, String surname, String stdId, double grade1, double grade2, double grade3,
-			double gpa) throws IOException {
+	public Student(String name, String surname, String stdId, double grade1, double grade2, double grade3) throws IOException 
+	{
 		this.name=name;
 		this.surname=surname;
 		this.stdId=stdId;
 		this.grade1=grade1;
 		this.grade2=grade2;
 		this.grade3=grade3;
-		this.gpa=gpa;
+		this.gpa=(this.grade1+this.grade2+this.grade3)/3;
 		
+	}
+	public double GetGPA(String id) throws IOException
+	{
+		String[] parts=select(id).split(" ");
+		return (Double.parseDouble(parts[3])+Double.parseDouble(parts[4])+Double.parseDouble(parts[5]))/3;
 	}
 	
 	public Boolean studetnWriter () throws IOException 
@@ -91,11 +96,10 @@ public class Student extends Connection
 		String lineToRemove = id;
 		String currentLine;
 
-		while((currentLine = reader.readLine()) != null) {
+		while((currentLine = reader.readLine()) != null) 
+		{
 		    // trim newline when comparing with lineToRemove
-			
 			String[] parts =currentLine.split(" ");
-		    //String trimmedLine = currentLine.trim();
 		    if(parts[0].equals(lineToRemove)) continue;
 		    writer.write(currentLine + System.getProperty("line.separator"));
 		}

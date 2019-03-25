@@ -10,9 +10,11 @@ public class Main {
 		String name,surname,stdId;
 		double grade1,grade2,grade3,gpa;
 		
-		
-		System.out.println("1-add student\n2-list student\n3-delete student\n4-update studetn\n");
+		//menu
+		System.out.println("1-Add Student\n2-List Students\n3-Delete Student\n4-Update Studentn\n5-Select Student\n6-Show GPA"
+				+ "\n7-Avrage GPA");
 		Scanner sc=new Scanner(System.in);
+		//user request processing
 		switch (sc.nextInt()) 
 		{
 		case 1:
@@ -26,8 +28,8 @@ public class Main {
 				grade1=sc.nextDouble();
 				grade2=sc.nextDouble();
 				grade3=sc.nextDouble();
-				gpa= (grade1+grade2+grade3)/3;
-				Student s=new Student(name,surname,stdId,grade1,grade2,grade3,gpa);
+				
+				Student s=new Student(name,surname,stdId,grade1,grade2,grade3);
 				if( s.studetnWriter())
 					System.out.println("student added succesfully\ndo you want to add new student?!Y/N");
 				else
@@ -84,6 +86,13 @@ public class Main {
 			System.out.println("write studentId that you want to see details");
 			Student s4=new Student();
 			System.out.println(s4.select(sc.next()));
+			break;
+		case 6:
+			Student s5=new Student();
+			System.out.println("write studentId that you want to see GPA");
+			System.out.println(s5.GetGPA(sc.next()));
+			break;
+		case 7:
 			break;
 		}
 		sc.close();
