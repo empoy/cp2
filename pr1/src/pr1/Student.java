@@ -5,6 +5,7 @@ package pr1;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,22 +39,36 @@ public class Student extends Connection
 	}
 	public double GetGPA(String id) throws IOException
 	{
+		//call select method to get info of student and calculate gpa
 		String[] parts=select(id).split(" ");
 		return (Double.parseDouble(parts[3])+Double.parseDouble(parts[4])+Double.parseDouble(parts[5]))/3;
+	}
+	
+	public double AvgGpa() throws IOException
+	{
+		Scanner sc=new Scanner(file);
+		String[] parts;
+		double gPA=0;
+		int counter=0;
+		while(sc.hasNextLine())
+		{
+			parts= sc.nextLine().split(" ");
+			gPA+=(Double.parseDouble(parts[3])+Double.parseDouble(parts[4])+Double.parseDouble(parts[5]))/3;
+			counter ++;
+		}
+		sc.close();
+		return gPA/counter;
 	}
 	
 	public Boolean studetnWriter () throws IOException 
 	{
 		File inputFile = new File(f);
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-		//BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-		
 		String check = stdId;
 		String currentLine;
 		
-		while((currentLine = reader.readLine()) != null) {
-		    // trim newline when comparing with lineToRemove
-			
+		while((currentLine = reader.readLine()) != null) 
+		{
 			String[] parts =currentLine.split(" ");
 		    //String trimmedLine = currentLine.trim();
 		    if(parts[0].equals(check)) 
@@ -82,7 +97,6 @@ public class Student extends Connection
 		Scanner sc=new Scanner(file);
 		while(sc.hasNextLine())
 			System.out.println(sc.nextLine());
-		//return reader;
 		sc.close();
 	}
 	public Boolean delete(String id) throws IOException
@@ -100,7 +114,8 @@ public class Student extends Connection
 		{
 		    // trim newline when comparing with lineToRemove
 			String[] parts =currentLine.split(" ");
-		    if(parts[0].equals(lineToRemove)) continue;
+		    if(parts[0].equals(lineToRemove)) 
+		    	continue;
 		    writer.write(currentLine + System.getProperty("line.separator"));
 		}
 		writer.close(); 

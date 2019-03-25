@@ -93,6 +93,8 @@ public class Main {
 			System.out.println(s5.GetGPA(sc.next()));
 			break;
 		case 7:
+			Student s6=new Student();
+			System.out.println(s6.AvgGpa()); 
 			break;
 		}
 		sc.close();
