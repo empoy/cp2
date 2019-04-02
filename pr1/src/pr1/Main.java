@@ -12,7 +12,7 @@ public class Main {
 		
 		//menu
 		System.out.println("1-Add Student\n2-List Students\n3-Delete Student\n4-Update Studentn\n5-Select Student\n6-Show GPA"
-				+ "\n7-Avrage GPA");
+				+ "\n7-Avrage GPA\n8-Sort by GPA\n9-Search by GPA");
 		Scanner sc=new Scanner(System.in);
 		//user request processing
 		switch (sc.nextInt()) 
@@ -96,9 +96,10 @@ public class Main {
 			Student s6=new Student();
 			System.out.println(s6.AvgGpa()); 
 			break;
-		default:
-			System.out.println("wrong input");
-			break;
+		case 8:
+			Student s7=new Student();
+			s7.gpaSortBubble();
+		
 		}
 		sc.close();
 		
