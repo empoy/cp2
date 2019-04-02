@@ -251,8 +251,77 @@ public class Student extends Connection
 		}
 		return ar;
 	}
+/*	
+	public ArrayList<Student> gpaSortQuick () throws IOException
+	{
+		ArrayList<Student> ar=new ArrayList<Student>();
+		Scanner sc=new Scanner(file);
+		int high=0,low=100;
+		int i=0;
+		while(sc.hasNextLine())
+		{
+			String[] temp=sc.nextLine().split(" ");
+			ar.add(new Student(temp[1],temp[2],temp[0],Double.parseDouble(temp[3]),
+					Double.parseDouble(temp[4]),Double.parseDouble(temp[5])));
+			if ( (Double.parseDouble(temp[3])+
+					Double.parseDouble(temp[4])+Double.parseDouble(temp[5]))/3 > high )
+				high=i;
+			else if ( (Double.parseDouble(temp[3])+
+					Double.parseDouble(temp[4])+Double.parseDouble(temp[5]))/3 < low )
+				low=i;
+			i++;
+		}
+		sc.close();
+		sort(ar, low, high);
+		for (int j = 0; j < ar.size(); j++) {
+			System.out.println(ar.get(j).getName()+" "+ar.get(j).GetGPA(ar.get(j).getStdId()));
+		}
+		return null;
+	}
+	
+	private int quickSortPartion( ArrayList<Student> arr ,int low, int high) throws IOException
+	{
+		double pivot = arr.get(high).GetGPA(arr.get(high).getStdId()); 
+        int i = (low-1); // index of smaller element 
+        for (int j=low; j<high; j++) 
+        { 
+            // If current element is smaller than or 
+            // equal to pivot 
+            if (arr.get(j).GetGPA(arr.get(j).getStdId()) <= pivot) 
+            { 
+                i++; 
+  
+                // swap arr[i] and arr[j] 
+                Student temp = arr.get(i);  
+                arr.set(i, arr.get(j));
+                arr.set(j, temp);
+                
+            } 
+        } 
+  
+        // swap arr[i+1] and arr[high] (or pivot)  
+        Student temp = arr.get(i+1);
+        arr.set(i+1, arr.get(high));
+        arr.set(high, temp);
+  
+        return i+1; 
+			
+	}
+	void sort(ArrayList<Student> arr ,int low, int high) throws IOException 
+    { 
+        if (low < high) 
+        { 
+            /* pi is partitioning index, arr[pi] is  
+              now at right place */
+ /*           int pi = quickSortPartion(arr, low, high); 
+  
+            // Recursively sort elements before 
+            // partition and after partition 
+            sort(arr, low, pi-1); 
+            sort(arr, pi+1, high); 
+        } 
+    } 
 		
-	
-	
+*/	
 	
 }

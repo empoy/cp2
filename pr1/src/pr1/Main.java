@@ -12,7 +12,7 @@ public class Main {
 		
 		//menu
 		System.out.println("1-Add Student\n2-List Students\n3-Delete Student\n4-Update Studentn\n5-Select Student\n6-Show GPA"
-				+ "\n7-Avrage GPA\n8-Sort by GPA\n9-Search by GPA");
+				+ "\n7-Avrage GPA\n8-Sort by GPA");
 		Scanner sc=new Scanner(System.in);
 		//user request processing
 		switch (sc.nextInt()) 
@@ -28,7 +28,6 @@ public class Main {
 				grade1=sc.nextDouble();
 				grade2=sc.nextDouble();
 				grade3=sc.nextDouble();
-				
 				Student s=new Student(name,surname,stdId,grade1,grade2,grade3);
 				if( s.studetnWriter())
 					System.out.println("student added succesfully\ndo you want to add new student?!Y/N");
@@ -99,6 +98,8 @@ public class Main {
 		case 8:
 			Student s7=new Student();
 			s7.gpaSortBubble();
+			break;
+		
 		
 		}
 		sc.close();
