@@ -3,6 +3,7 @@ package com.sampoytech.shopaholic;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,9 +20,25 @@ private String id,username,password,name,surname,accessLevel,number,address;
 	String tempF="Login_temp.txt";
 	File file=new File(f);
 	File fileT=new File(tempF);
-	public UserConnection()
-	{}
-	public UserConnection(User u) 
+	ArrayList<User> userArrayList;
+	
+	public UserConnection() throws IOException
+	{
+		Scanner sc=new Scanner(file);
+		String temp;
+		userArrayList=new ArrayList<User>();
+		//userArrayList.add(new User());
+		while(sc.hasNextLine()) 
+		{
+			temp=sc.nextLine();
+			String[] split=temp.split(" ");
+			userArrayList.add(new User(split[0],split[1],split[2],split[3],split[4],split[5],
+					split[6],split[7]));
+		}
+		sc.close();
+		
+	}
+	public UserConnection(User u) throws IOException 
 	{
 		this.id=u.getId();
 		this.username=u.getUsername();
@@ -31,38 +48,30 @@ private String id,username,password,name,surname,accessLevel,number,address;
 		this.accessLevel=u.getAccessLevel();
 		this.number=u.getNumber();
 		this.address=u.getAddress();
+		
 	}
-	
-	
-	
 	
 	
 	
 	@Override
 	Boolean delete(String id) throws IOException {
 		// TODO Auto-generated method stub
-		BufferedReader br=new BufferedReader(new FileReader(file));
-		BufferedWriter bw=new BufferedWriter(new FileWriter(fileT));
-		
-		String lineToRemove = id;
-		String currentLine;
-
-		while((currentLine = br.readLine()) != null) 
+		PrintWriter pw=new PrintWriter(file);
+		Boolean a=false;
+		for(int i=0; i<userArrayList.size();i++)
 		{
-			String[] parts =currentLine.split(" ");
-		    if(parts[0].equals(lineToRemove)) continue;
-		    bw.write(currentLine + System.getProperty("line.separator"));
+			if (id.equals(userArrayList.get(i).getId()) )
+			{
+			userArrayList.remove(i);
+			a=true;
+			}
+			pw.println(userArrayList.get(i).getId()+" "+userArrayList.get(i).getUsername()+" "+
+				userArrayList.get(i).getPassword()+" "+userArrayList.get(i).getName()+" "+
+				userArrayList.get(i).getSurname()+" "+userArrayList.get(i).getAccessLevel()+" "+
+				userArrayList.get(i).getNumber()+" "+userArrayList.get(i).getAddress());
 		}
-		bw.close(); 
-		br.close(); 
-		file.setWritable(true);
-		fileT.setWritable(true);
-		boolean successful1=file.delete();
-		boolean successful = fileT.renameTo(file);
-		if (successful==true && successful1==true) 
-		return successful;
-		return false;
-		
+		pw.close();
+		return a;
 	}
 
 	@Override
@@ -129,21 +138,7 @@ private String id,username,password,name,surname,accessLevel,number,address;
 	@Override
 	ArrayList<User> listerUser() throws IOException {
 		// TODO Auto-generated method stub
-		Scanner sc=new Scanner(file);
-		String temp;
-		ArrayList<User> u=new ArrayList<User>();
-		u.add(new User());
-		String[][] reader = new String[100][8];
-		int i=0;
-		while(sc.hasNextLine()) 
-		{
-			temp=sc.nextLine();
-			String[] split=temp.split(" ");
-			u.add(new User(split[0],split[1],split[2],split[3],split[4],split[5],
-					split[6],split[7]));
-		}
-		sc.close();
-		return u;
+		return userArrayList;
 		
 	}
 
