@@ -249,15 +249,15 @@ public class SuperuserGUI {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				txtId.setText(user.get(table.getSelectedRow()+1).getId());
-				txtUsername.setText(user.get(table.getSelectedRow()+1).getUsername());
-				txtPassword.setText(user.get(table.getSelectedRow()+1).getPassword());
-				txtName.setText( user.get(table.getSelectedRow()+1).getName());
-				txtSurname.setText(user.get(table.getSelectedRow()+1).getSurname());
-				txtHyper.setText(user.get(table.getSelectedRow()+1).getAddress());
-				txtNumber.setText(user.get(table.getSelectedRow()+1).getNumber());
+				txtId.setText(user.get(table.getSelectedRow()).getId());
+				txtUsername.setText(user.get(table.getSelectedRow()).getUsername());
+				txtPassword.setText(user.get(table.getSelectedRow()).getPassword());
+				txtName.setText( user.get(table.getSelectedRow()).getName());
+				txtSurname.setText(user.get(table.getSelectedRow()).getSurname());
+				txtHyper.setText(user.get(table.getSelectedRow()).getAddress());
+				txtNumber.setText(user.get(table.getSelectedRow()).getNumber());
 				try {
-				AccCombo.setSelectedIndex((Integer.valueOf(user.get(table.getSelectedRow()+1).getAccessLevel()))-1);
+				AccCombo.setSelectedIndex((Integer.valueOf(user.get(table.getSelectedRow()).getAccessLevel()))-1);
 				}
 				catch (Exception e) {
 					// TODO: handle exception
@@ -316,7 +316,7 @@ public class SuperuserGUI {
 		model.addColumn("Name");
 		model.addColumn("surname");
 		
-		for (int i = 1; i < user.size(); i++) 
+		for (int i = 0; i < user.size(); i++) 
 		{
 			Vector<Object> row = new Vector<Object>(user.size());
 			row.add(user.get(i).getId());
