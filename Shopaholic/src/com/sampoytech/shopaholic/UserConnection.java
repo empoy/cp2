@@ -77,26 +77,25 @@ private String id,username,password,name,surname,accessLevel,number,address;
 	@Override
 	Boolean updateUser(User user) throws IOException {
 		// TODO Auto-generated method stub
-		BufferedReader reader = new BufferedReader(new FileReader(file));
-		BufferedWriter writer = new BufferedWriter(new FileWriter(fileT));
-		String select = user.getId();
-		String currentLine;
-		while((currentLine = reader.readLine()) != null) 
+		PrintWriter pw=new PrintWriter(file);
+		Boolean a=false;
+		for (int i=0 ; i<userArrayList.size();i++)
 		{
-			String[] parts =currentLine.split(" ");
-		        		    	
-		    	if(parts[0].equals(select)) 
-		    		writer.write(user.getId()+" "+user.getUsername()+" "+user.getPassword()+" "+user.getName()+" "
-		    				+user.getSurname()+" "+user.getAccessLevel()+" "+user.getNumber()+" "+user.getAddress()+"\n");
-		    	else
-		    		writer.write(currentLine + System.getProperty("line.separator"));
-		} 
-		reader.close();
-		writer.close();
-		boolean successful1=file.delete();
-		boolean successful = fileT.renameTo(file);
-		
-		return (successful&&successful1);
+			if(user.getId().equals(userArrayList.get(i).getId()))
+			{
+				pw.println(user.getId()+" "+user.getUsername()+" "+user.getPassword()+" "+
+						user.getName()+" "+user.getSurname()+" "+user.getAccessLevel()+" "+
+						user.getNumber()+" "+user.getAddress());
+				a=true;
+				continue;
+			}
+			pw.println(userArrayList.get(i).getId()+" "+userArrayList.get(i).getUsername()+" "+
+					userArrayList.get(i).getPassword()+" "+userArrayList.get(i).getName()+" "+
+					userArrayList.get(i).getSurname()+" "+userArrayList.get(i).getAccessLevel()+" "+
+					userArrayList.get(i).getNumber()+" "+userArrayList.get(i).getAddress());
+		}
+		pw.close();
+		return a;
 		
 	}
 
@@ -109,29 +108,17 @@ private String id,username,password,name,surname,accessLevel,number,address;
 	@Override
 	Boolean adderUser(User u) throws IOException {
 		// TODO Auto-generated method stub
-		BufferedReader br=new BufferedReader(new FileReader(file) );
-		String check = u.getId();
-		String currentLine;
-		while((currentLine = br.readLine()) != null) 
-		{
-			String[] parts =currentLine.split(" ");
-		    if(parts[0].equals(check)) 
-		    {
-		    	br.close();
-		    	return false;
-		    }
-		    else
-		    {
-		    	PrintWriter pw=new PrintWriter(new FileWriter(file,true));
-				pw.println(u.getId()+" "+u.getUsername()+" "+u.getPassword()+" "+u.getName()
-						+" "+u.getSurname()+" "+u.getPassword()+" "+u.getName()+" "+u.getAddress());
-				pw.close();
-				br.close();
-				return true;
-		    }
+		for (int i = 0; i < userArrayList.size(); i++) {
+			if (u.getId().equals(userArrayList.get(i).getId()))
+			{
+				return false;
+			}
 		}
-		br.close();
-		return null;
+		PrintWriter pw=new PrintWriter(new FileWriter(file,true));
+		pw.println(u.getId()+" "+u.getUsername()+" "+u.getPassword()+" "+u.getName()
+				+" "+u.getSurname()+" "+u.getPassword()+" "+u.getName()+" "+u.getAddress());
+		pw.close();
+		return true;
 		
 	}
 
@@ -139,7 +126,6 @@ private String id,username,password,name,surname,accessLevel,number,address;
 	ArrayList<User> listerUser() throws IOException {
 		// TODO Auto-generated method stub
 		return userArrayList;
-		
 	}
 
 	@Override
@@ -151,29 +137,15 @@ private String id,username,password,name,surname,accessLevel,number,address;
 	@Override
 	User selectUser(String id) throws IOException {
 		// TODO Auto-generated method stub
-		User u=new User();
-		BufferedReader br=new BufferedReader(new FileReader(file));
-		
-		String currentLine;
-
-		while((currentLine = br.readLine()) != null) 
-		{
-			String[] parts =currentLine.split(" ");
-		    if(parts[0].equals(id)) 
-		    {
-		    u.setId(id);
-		    u.setUsername(parts[1]);
-		    u.setPassword(parts[2]);
-		    u.setName(parts[3]);
-		    u.setSurname(parts[4]);
-		    u.setAccessLevel(parts[5]);
-		    u.setNumber(parts[6]);
-		    u.setAddress(parts[7]);
-		    }
+		for (int i = 0; i < userArrayList.size(); i++) {
+			if (id.equals(userArrayList.get(i).getId()))
+			{
+				return userArrayList.get(i);
+			}
 		}
-		br.close();
-		return u;
+		return null;
 	}
+	
 	@Override
 	Boolean adderProduct(Product product) {
 		// TODO Auto-generated method stub

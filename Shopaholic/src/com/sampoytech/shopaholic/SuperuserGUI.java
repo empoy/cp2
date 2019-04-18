@@ -264,8 +264,12 @@ public class SuperuserGUI {
 				}
 			}
 		});
-		
+		try {
 		tableFill();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		btnUpdate.addActionListener(new ActionListener() 
 		{
@@ -285,32 +289,23 @@ public class SuperuserGUI {
 					if(uc.updateUser(u))
 					{
 						JOptionPane.showMessageDialog(null, "Successfully Updated");
-						user=uc.listerUser();
+						tableFill();
 					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				tableFill();
+				
 			}
 		});
 		
 		
-		
-		
-		
-		
-		
-		
 	}
 
-	public void tableFill()
+	public void tableFill() throws IOException
 	{
-		
-
-		
-		
-		
+		uc=new UserConnection();
+		user=uc.listerUser();
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("ID");
 		model.addColumn("Name");
