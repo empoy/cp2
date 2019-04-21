@@ -11,57 +11,17 @@ public class ProductConnection extends Connection {
 		
 		return null;
 	}
-
 	@Override
-	Boolean updateUser(User user) {
+	ArrayList<Product> lister() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
-	Boolean updateProduct(Product product) {
+	Product select(String id) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	Boolean adderUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	ArrayList<User> listerUser() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	ArrayList<Product> listerProduct() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
-	
-
-	@Override
-	Boolean adderProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	User selectUser(String id) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	Product selectProduct(String id) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 

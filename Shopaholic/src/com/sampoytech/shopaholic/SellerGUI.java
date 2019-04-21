@@ -78,7 +78,7 @@ public class SellerGUI {
 		frame.getContentPane().add(addressTxt);
 		
 		Connection uc=new UserConnection();
-		User u=uc.selectUser(log);
+		User u=(User) uc.select(log);
 		nameTxt.setText(u.getName());
 		surnameTxt.setText(u.getSurname());
 		numberTxt.setText(u.getNumber());

@@ -39,7 +39,7 @@ public class SuperuserGUI {
 	static String log;
 	
 	UserConnection uc=new UserConnection();
-	ArrayList<User> user=uc.listerUser();
+	ArrayList<User> user=uc.lister();
 	
 	
 	/**
@@ -112,7 +112,7 @@ public class SuperuserGUI {
 						if (uc.delete(txtId.getText()))
 						{
 							JOptionPane.showMessageDialog(null, "Successfully Deleted");
-							user=uc.listerUser();
+							user=uc.lister();
 							tableFill();
 							
 						}
@@ -305,7 +305,7 @@ public class SuperuserGUI {
 	public void tableFill() throws IOException
 	{
 		uc=new UserConnection();
-		user=uc.listerUser();
+		user=uc.lister();
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("ID");
 		model.addColumn("Name");

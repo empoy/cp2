@@ -74,7 +74,6 @@ private String id,username,password,name,surname,accessLevel,number,address;
 		return a;
 	}
 
-	@Override
 	Boolean updateUser(User user) throws IOException {
 		// TODO Auto-generated method stub
 		PrintWriter pw=new PrintWriter(file);
@@ -96,16 +95,10 @@ private String id,username,password,name,surname,accessLevel,number,address;
 		}
 		pw.close();
 		return a;
-		
+	
 	}
 
-	@Override
-	Boolean updateProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	
 	Boolean adderUser(User u) throws IOException {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < userArrayList.size(); i++) {
@@ -123,19 +116,13 @@ private String id,username,password,name,surname,accessLevel,number,address;
 	}
 
 	@Override
-	ArrayList<User> listerUser() throws IOException {
+	ArrayList<User> lister() throws IOException {
 		// TODO Auto-generated method stub
 		return userArrayList;
 	}
 
 	@Override
-	ArrayList<Product> listerProduct() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	User selectUser(String id) throws IOException {
+	User select(String id) throws IOException {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < userArrayList.size(); i++) {
 			if (id.equals(userArrayList.get(i).getId()))
@@ -146,16 +133,4 @@ private String id,username,password,name,surname,accessLevel,number,address;
 		return null;
 	}
 	
-	@Override
-	Boolean adderProduct(Product product) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	Product selectProduct(String id) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
 }
