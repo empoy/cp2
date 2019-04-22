@@ -80,7 +80,8 @@ public class Student extends Connection
 	{
 		//call select method to get info of student and calculate gpa
 		String[] parts=select(id).split(" ");
-		return (Double.parseDouble(parts[3])+Double.parseDouble(parts[4])+Double.parseDouble(parts[5]))/3;
+		return (Double.parseDouble(parts[3])+Double.parseDouble(parts[4])+
+				Double.parseDouble(parts[5]))/3;
 	}
 	//find total average of gpa
 	public double AvgGpa() throws IOException
@@ -92,7 +93,8 @@ public class Student extends Connection
 		while(sc.hasNextLine())
 		{
 			parts= sc.nextLine().split(" ");
-			gPA+=(Double.parseDouble(parts[3])+Double.parseDouble(parts[4])+Double.parseDouble(parts[5]))/3;
+			gPA+=(Double.parseDouble(parts[3])+Double.parseDouble(parts[4])+
+					Double.parseDouble(parts[5]))/3;
 			counter ++;
 		}
 		sc.close();
@@ -101,6 +103,8 @@ public class Student extends Connection
 	//add new student
 	public Boolean studetnWriter () throws IOException 
 	{
+		long startTime = System.nanoTime();
+		
 		File inputFile = new File(f);
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		String check = stdId;
@@ -122,11 +126,14 @@ public class Student extends Connection
 				pw.println(stdId+" "+name+" "+surname+" "+grade1+" "+grade2+" "+grade3);
 				pw.close();
 				reader.close();
+				long endTime = System.nanoTime();
+				System.out.println("Took "+(endTime - startTime) + " ns");
 				return true;
 		    }
 		}
-		 
+		  
 		reader.close();
+		
 		return null; 
 		
 		
@@ -222,6 +229,7 @@ public class Student extends Connection
 	//sort students by their gpa
 	public ArrayList<Student> gpaSortBubble() throws IOException
 	{
+		long startTime = System.nanoTime();
 		ArrayList<Student> ar=new ArrayList<Student>();
 		Scanner sc=new Scanner(file);
 		
@@ -232,6 +240,7 @@ public class Student extends Connection
 					Double.parseDouble(temp[4]),Double.parseDouble(temp[5])));
 		}
 		sc.close();
+		long endTime = System.nanoTime();
 		for (int i = 0; i < ar.size()-1; i++) 
 		{
 			for (int j = 0; j < ar.size()-i-1; j++) 
@@ -249,6 +258,8 @@ public class Student extends Connection
 		for (int i = 0; i < ar.size(); i++) {
 			System.out.println(ar.get(i).getName()+" "+ar.get(i).GetGPA(ar.get(i).getStdId()));
 		}
+		
+		System.out.println("Took "+(endTime - startTime) + " ns");
 		return ar;
 	}
 /*	
