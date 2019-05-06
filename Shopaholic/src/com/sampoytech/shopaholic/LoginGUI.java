@@ -12,6 +12,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import javax.swing.Box;
 
 public class LoginGUI {
 
@@ -48,31 +53,44 @@ public class LoginGUI {
 	private void initialize() {
 		frmLogin = new JFrame();
 		frmLogin.setTitle("Login");
-		frmLogin.setBounds(100, 100, 450, 300);
+		frmLogin.setBounds(100, 100, 463, 352);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmLogin.getContentPane().setLayout(null);
+		frmLogin.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		username = new JTextField();
-		username.setBounds(145, 51, 233, 32);
-		frmLogin.getContentPane().add(username);
-		username.setColumns(10);
-		
-		password = new JPasswordField();
-		password.setBounds(145, 102, 233, 32);
-		frmLogin.getContentPane().add(password);
-		password.setColumns(10);
+		JPanel usernamePanel = new JPanel();
+		//frmLogin.getContentPane().add(usernamePanel);
 		
 		JLabel lblUsername = new JLabel("Username:");
+		usernamePanel.add(lblUsername);
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblUsername.setBounds(21, 54, 92, 26);
-		frmLogin.getContentPane().add(lblUsername);
+		
+		username = new JTextField();
+		usernamePanel.add(username);
+		username.setColumns(15);
+		
+		Box verticalBox = Box.createVerticalBox();
+		frmLogin.getContentPane().add(verticalBox);
+		
+		verticalBox.add(usernamePanel);
+		
+		JPanel passwordPanel = new JPanel();
+		//frmLogin.getContentPane().add(passwordPanel);
+		
+		verticalBox.add(passwordPanel);
 		
 		JLabel lblPassword = new JLabel("Password:");
+		passwordPanel.add(lblPassword);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPassword.setBounds(21, 107, 92, 26);
-		frmLogin.getContentPane().add(lblPassword);
+		
+		password = new JPasswordField();
+		passwordPanel.add(password);
+		password.setColumns(15);
+		
+		JPanel btnPanel = new JPanel();
+		frmLogin.getContentPane().add(btnPanel);
 		
 		JButton btnLogin = new JButton("Login");
+		btnPanel.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				User u=new User();
@@ -114,7 +132,5 @@ public class LoginGUI {
 				}
 			}
 		});
-		btnLogin.setBounds(191, 157, 141, 35);
-		frmLogin.getContentPane().add(btnLogin);
 	}
 }
