@@ -125,7 +125,7 @@ public class LoginGUI {
 					
 					break;
 				case "3":
-					
+						CustomerGUI.main(null);
 					break;
 				default:
 					break;
