@@ -65,6 +65,7 @@ private String id,username,password,name,surname,accessLevel,number,address;
 			userArrayList.remove(i);
 			a=true;
 			}
+			if(i!=userArrayList.size())
 			pw.println(userArrayList.get(i).getId()+" "+userArrayList.get(i).getUsername()+" "+
 				userArrayList.get(i).getPassword()+" "+userArrayList.get(i).getName()+" "+
 				userArrayList.get(i).getSurname()+" "+userArrayList.get(i).getAccessLevel()+" "+

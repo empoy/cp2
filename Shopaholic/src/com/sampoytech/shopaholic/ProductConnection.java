@@ -42,9 +42,10 @@ public class ProductConnection extends Connection {
 			if (id.equals(productArrayList.get(i).getId()) )
 			{
 				productArrayList.remove(i);
-			a=true;
+				a=true;
 			}
-			pw.println(productArrayList.get(i).getId()+" "+productArrayList.get(i).getName()+" "+
+			if(i!=productArrayList.size())
+				pw.println(productArrayList.get(i).getId()+" "+productArrayList.get(i).getName()+" "+
 					productArrayList.get(i).getPrice());
 		}
 		pw.close();
