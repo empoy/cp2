@@ -6,7 +6,6 @@ public class Product {
 	
 	private String name,id;
 	private int price;
-	private Date expiryDate;
 	
 
 	Product ()
@@ -14,23 +13,13 @@ public class Product {
 		
 	}
 	
-	Product (String id,String name,int price,Date expiryDate)
+	Product (String id,String name,int price)
 	{
 		this.setId(id);
 		this.setName(name);;
 		this.setPrice(price);
-		this.setExpiryDate(expiryDate);
+		
 	}
-
-	public Date getExpiryDate() {
-		return expiryDate;
-	}
-
-
-	public void setExpiryDate(Date expiryDate) {
-		this.expiryDate = expiryDate;
-	}
-
 
 	public int getPrice() {
 		return price;

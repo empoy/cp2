@@ -2,17 +2,30 @@ package com.sampoytech.shopaholic;
 
 import java.awt.EventQueue;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Vector;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SellerGUI {
 
 	private JFrame frame;
-
+	
 	/**
 	 * Launch the application.
 	 */
 	static String log;
+	private JTable table;
+	
+	ProductConnection pc;
+	ArrayList<Product> product;
 	public static void main(String[] args,String logId) {
 		log=logId;
 		EventQueue.invokeLater(new Runnable() {
@@ -30,16 +43,18 @@ public class SellerGUI {
 	/**
 	 * Create the application.
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	public SellerGUI() throws IOException {
+	public SellerGUI() throws IOException, ParseException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	private void initialize() throws IOException {
+	private void initialize() throws IOException, ParseException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 919, 719);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,5 +99,50 @@ public class SellerGUI {
 		numberTxt.setText(u.getNumber());
 		addressTxt.setText(u.getAddress());
 		
+		table = new JTable();
+		table.setBounds(43, 196, 813, 419);
+		frame.getContentPane().add(table);
+		tableFill();
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ProductAdder.main(null, log);
+			}
+		});
+		btnAdd.setBounds(107, 151, 141, 35);
+		frame.getContentPane().add(btnAdd);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnDelete.setBounds(440, 151, 141, 35);
+		frame.getContentPane().add(btnDelete);
+		
 	}
+	
+	public void tableFill() throws IOException, ParseException
+	{
+		pc=new ProductConnection(log);
+		product=pc.lister();
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("ID");
+		model.addColumn("Name");
+		model.addColumn("Price");
+		
+		for (int i = 0; i < product.size(); i++) 
+		{
+			Vector<Object> row = new Vector<Object>(product.size());
+			row.add(product.get(i).getId());
+			row.add(product.get(i).getName());
+			row.add(product.get(i).getPrice());
+			model.addRow(row);
+		}
+		
+		table.setModel(model);
+		//table.setRowSelectionInterval(0, 0);
+	}
+	
 }

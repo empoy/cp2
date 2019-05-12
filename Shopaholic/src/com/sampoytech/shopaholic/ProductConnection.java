@@ -28,10 +28,7 @@ public class ProductConnection extends Connection {
 		{
 			temp=sc.nextLine();
 			String[] split=temp.split(" ");
-			String dateString = split[3];
-	        SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy");
-	        Date date = sd.parse(dateString);
-			productArrayList.add(new Product(split[0],split[1],Integer.parseInt(split[2]),date));
+			productArrayList.add(new Product(split[0],split[1],Integer.parseInt(split[2])));
 		}
 		sc.close();
 	}
@@ -48,7 +45,7 @@ public class ProductConnection extends Connection {
 			a=true;
 			}
 			pw.println(productArrayList.get(i).getId()+" "+productArrayList.get(i).getName()+" "+
-					productArrayList.get(i).getPrice()+" "+productArrayList.get(i).getExpiryDate());
+					productArrayList.get(i).getPrice());
 		}
 		pw.close();
 		return a;
@@ -80,7 +77,7 @@ public class ProductConnection extends Connection {
 			}
 		}
 		PrintWriter pw=new PrintWriter(new FileWriter(file,true));
-		pw.println(p.getId()+" "+p.getName()+" "+p.getPrice()+" "+p.getExpiryDate());
+		pw.println(p.getId()+" "+p.getName()+" "+p.getPrice());
 		pw.close();
 		return true;
 	}
@@ -93,11 +90,11 @@ public class ProductConnection extends Connection {
 		{
 			if(p.getId().equals(productArrayList.get(i).getId()))
 			{
-				pw.println(p.getId()+" "+p.getName()+" "+p.getPrice()+" "+p.getExpiryDate());
+				pw.println(p.getId()+" "+p.getName()+" "+p.getPrice());
 				a=true;
 				continue;
 			}
-			pw.println(p.getId()+" "+p.getName()+" "+p.getPrice()+" "+p.getExpiryDate());
+			pw.println(p.getId()+" "+p.getName()+" "+p.getPrice());
 		}
 		pw.close();
 		return a;
