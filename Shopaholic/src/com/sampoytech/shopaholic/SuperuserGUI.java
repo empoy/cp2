@@ -91,7 +91,18 @@ public class SuperuserGUI {
 		
 		
 		
+		
 		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				UserAdder ua;
+				ua = new UserAdder();
+				ua.main(null,log);
+				
+				frame.dispose();
+			}
+		});
 		btnAdd.setBounds(632, 266, 141, 35);
 		frame.getContentPane().add(btnAdd);
 		
@@ -321,6 +332,7 @@ public class SuperuserGUI {
 		}
 		
 		table.setModel(model);
+		table.setRowSelectionInterval(0, 0);
 	}
 	protected void open(URI uri) {
 		// TODO Auto-generated method stub

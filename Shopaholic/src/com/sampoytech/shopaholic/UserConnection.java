@@ -109,7 +109,7 @@ private String id,username,password,name,surname,accessLevel,number,address;
 		}
 		PrintWriter pw=new PrintWriter(new FileWriter(file,true));
 		pw.println(u.getId()+" "+u.getUsername()+" "+u.getPassword()+" "+u.getName()
-				+" "+u.getSurname()+" "+u.getPassword()+" "+u.getName()+" "+u.getAddress());
+				+" "+u.getSurname()+" "+u.getAccessLevel()+" "+u.getNumber()+" "+u.getAddress());
 		pw.close();
 		return true;
 		

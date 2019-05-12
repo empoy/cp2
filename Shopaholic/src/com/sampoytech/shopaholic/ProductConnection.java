@@ -16,9 +16,11 @@ public class ProductConnection extends Connection {
 
 	File file;
 	ArrayList<Product> productArrayList;
-	ProductConnection(String file) throws ParseException,IOException
+	ProductConnection(String f) throws ParseException,IOException
 	{
-		this.file=new File(file);
+		f+=".txt";
+		this.file=new File(f);
+		PrintWriter pw=new PrintWriter(new FileWriter(this.file,true));
 		Scanner sc=new Scanner(file);
 		productArrayList=new ArrayList<Product>();
 		String temp;
