@@ -94,6 +94,7 @@ public class ProductAdder {
 					e1.printStackTrace();
 				}
 				frame.dispose();
+				SellerGUI.main(null, ID);
 			}
 		});
 		btnSave.setBounds(160, 173, 141, 35);

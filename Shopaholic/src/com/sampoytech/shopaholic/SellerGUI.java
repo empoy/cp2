@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
@@ -107,6 +108,7 @@ public class SellerGUI {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
 				ProductAdder.main(null, log);
 			}
 		});
@@ -116,6 +118,27 @@ public class SellerGUI {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				String deleteID=JOptionPane.showInputDialog(frame, "Enter ID");
+				
+				try {
+					pc=new ProductConnection(log);
+				} catch (ParseException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					if(pc.delete(deleteID))
+					{
+						JOptionPane.showMessageDialog(null, "Successfully Deleted");
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Delete Unsuccessful");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				SellerGUI.main(null, log);
 			}
 		});
 		btnDelete.setBounds(440, 151, 141, 35);
