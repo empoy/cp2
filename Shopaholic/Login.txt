@@ -1,4 +1,3 @@
 f12 admin admin admin admin 1 admin admin
-f13 seller seller seller3 seller 2 seller https://www.google.com/maps/place/Istanbul+Ayd%C4%B1n+University/@40.9912313,28.797528,16z/data=!4m5!3m4!1s0x0:0x6594147beb14e9b4!8m2!3d40.9919148!4d28.7975317
-f14 customer customer customer customer 3 admin admin
-f15 admin admin admin admin 1 admin admin
+f13 seller seller seller seller 2 seller seller
+f14 customer customer customer customer 3 customer customer

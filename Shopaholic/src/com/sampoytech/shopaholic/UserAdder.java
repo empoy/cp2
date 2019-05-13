@@ -144,42 +144,20 @@ public class UserAdder {
 		
 		
 		
-		JButton btnSave = new JButton("Save");
+		JButton btnSave = new JButton("Save And Close");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
-				frame.dispose();
-				//File file=new File("Login.txt");
-				int i=comboBox.getSelectedIndex();
-				
+				//frame.dispose();
+				//File file=new File("Login.txt");				
 				User u=new User(txtID.getText(),txtUsername.getText(),txtPassword.getText(),txtName.getText(),
 						txtSurname.getText(),String.valueOf(comboBox.getSelectedIndex()+1),txtNumber.getText(),txtAddress.getText());
-				
-				switch (i) {
-				case 0:
 					try {
 						UserConnection uc=new UserConnection();
 						if (uc.adderUser(u))
 						{
 							JOptionPane.showMessageDialog(null, "Successfully Added");
-							txtID.setText("");
-							txtUsername.setText("");
-							txtPassword.setText("");
-							txtName.setText("");
-							txtSurname.setText("");
-							txtNumber.setText("");
-							txtAddress.setText("");
-							try {
-								SuperuserGUI s=new SuperuserGUI();
-								s.main(null, Log);
-								
-								
-							} catch (URISyntaxException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
 						}
 						else 
 							JOptionPane.showMessageDialog(null, "Adding was unsuccessful");
@@ -188,85 +166,47 @@ public class UserAdder {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
-					
-					break;
-				case 1:
-					
-					
-					
-					
-					try {
-						UserConnection uc=new UserConnection();
-						if (uc.adderUser(u))
-						{
-							JOptionPane.showMessageDialog(null, "Successfully Added");
-							txtID.setText("");
-							txtUsername.setText("");
-							txtPassword.setText("");
-							txtName.setText("");
-							txtSurname.setText("");
-							txtNumber.setText("");
-							txtAddress.setText("");
-							try {
-								SuperuserGUI s=new SuperuserGUI();
-								s.main(null, Log);
-							} catch (URISyntaxException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						else 
-							JOptionPane.showMessageDialog(null, "Adding was unsuccessful");
-						
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					
-					break;
-				case 2:
-					try {
-						UserConnection uc=new UserConnection();
-						if (uc.adderUser(u))
-						{
-							JOptionPane.showMessageDialog(null, "Successfully Added");
-							txtID.setText("");
-							txtUsername.setText("");
-							txtPassword.setText("");
-							txtName.setText("");
-							txtSurname.setText("");
-							txtNumber.setText("");
-							txtAddress.setText("");
-							try {
-								SuperuserGUI s=new SuperuserGUI();
-								s.main(null, Log);
-								frame.dispose();
-							} catch (URISyntaxException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						else 
-							JOptionPane.showMessageDialog(null, "Adding was unsuccessful");
-						
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					break;
-
-				default:
-					break;
-				}
+					frame.dispose();
+					SuperuserGUI.main(null, Log);
 				
 			}
 			
 		});
-		btnSave.setBounds(409, 483, 141, 35);
+		btnSave.setBounds(364, 483, 186, 35);
 		frame.getContentPane().add(btnSave);
+		
+		JButton btnSaveAndNew = new JButton("Save And New");
+		btnSaveAndNew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				User u=new User(txtID.getText(),txtUsername.getText(),txtPassword.getText(),txtName.getText(),
+						txtSurname.getText(),String.valueOf(comboBox.getSelectedIndex()+1),txtNumber.getText(),txtAddress.getText());
+					try {
+						UserConnection uc=new UserConnection();
+						if (uc.adderUser(u))
+						{
+							JOptionPane.showMessageDialog(null, "Successfully Added");
+							txtID.setText("");
+							txtUsername.setText("");
+							txtPassword.setText("");
+							txtName.setText("");
+							txtSurname.setText("");
+							txtNumber.setText("");
+							txtAddress.setText("");	
+						}
+						else 
+							JOptionPane.showMessageDialog(null, "Adding was unsuccessful");
+						
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				
+			}
+		});
+		btnSaveAndNew.setBounds(21, 483, 178, 35);
+		frame.getContentPane().add(btnSaveAndNew);
 	}
 
 }

@@ -16,6 +16,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -95,11 +96,7 @@ public class SuperuserGUI {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				UserAdder ua;
-				ua = new UserAdder();
-				ua.main(null,log);
-				
+				UserAdder.main(null,log);
 				frame.dispose();
 			}
 		});
@@ -112,31 +109,7 @@ public class SuperuserGUI {
 		frame.getContentPane().add(btnUpdate);
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//Boolean delete;
-				int dialogButton = JOptionPane.YES_NO_OPTION;
-				int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Delete UserId"+txtId.getText()+"?","Warning",dialogButton);
-				if(dialogResult == JOptionPane.YES_OPTION) 
-				{
-					try {
-						if (uc.delete(txtId.getText()))
-						{
-							JOptionPane.showMessageDialog(null, "Successfully Deleted");
-							user=uc.lister();
-							tableFill();
-							
-						}
-						else
-							JOptionPane.showMessageDialog(null, "Delete Failed");
-					} catch (HeadlessException | IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-			}
-		});
+		
 		btnDelete.setBounds(632, 378, 141, 35);
 		frame.getContentPane().add(btnDelete);
 		
@@ -253,6 +226,41 @@ public class SuperuserGUI {
 			new String[] {
 			}
 		));
+		
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//Boolean delete;
+				
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Delete UserId "+txtId.getText()+"?","Warning",dialogButton);
+				if(dialogResult == JOptionPane.YES_OPTION) 
+				{
+					try {
+						if (uc.delete(txtId.getText()))
+						{
+							//frame.dispose();
+							//SuperuserGUI.main(null, log);
+							if(AccCombo.getSelectedIndex()==1)
+							{
+								File fi=new File(txtId.getText()+".txt");
+								fi.delete();
+							}
+							JOptionPane.showMessageDialog(null, "Successfully Deleted");
+							
+							user=uc.lister();
+							tableFill();
+						}
+						else
+							JOptionPane.showMessageDialog(null, "Delete Failed");
+					} catch (HeadlessException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
+		
 		table.setBounds(21, 25, 315, 483);
 		frame.getContentPane().add(table);
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -260,18 +268,21 @@ public class SuperuserGUI {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				txtId.setText(user.get(table.getSelectedRow()).getId());
-				txtUsername.setText(user.get(table.getSelectedRow()).getUsername());
-				txtPassword.setText(user.get(table.getSelectedRow()).getPassword());
-				txtName.setText( user.get(table.getSelectedRow()).getName());
-				txtSurname.setText(user.get(table.getSelectedRow()).getSurname());
-				txtHyper.setText(user.get(table.getSelectedRow()).getAddress());
-				txtNumber.setText(user.get(table.getSelectedRow()).getNumber());
-				try {
-				AccCombo.setSelectedIndex((Integer.valueOf(user.get(table.getSelectedRow()).getAccessLevel()))-1);
-				}
-				catch (Exception e) {
-					// TODO: handle exception
+				if(table.getSelectedRow()!=-1)
+				{
+					txtId.setText(user.get(table.getSelectedRow()).getId());
+					txtUsername.setText(user.get(table.getSelectedRow()).getUsername());
+					txtPassword.setText(user.get(table.getSelectedRow()).getPassword());
+					txtName.setText( user.get(table.getSelectedRow()).getName());
+					txtSurname.setText(user.get(table.getSelectedRow()).getSurname());
+					txtHyper.setText(user.get(table.getSelectedRow()).getAddress());
+					txtNumber.setText(user.get(table.getSelectedRow()).getNumber());
+					try {
+					AccCombo.setSelectedIndex((Integer.valueOf(user.get(table.getSelectedRow()).getAccessLevel()))-1);
+					}
+					catch (Exception e) {
+						// TODO: handle exception
+					}
 				}
 			}
 		});
