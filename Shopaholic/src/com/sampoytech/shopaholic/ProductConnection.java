@@ -1,15 +1,11 @@
 package com.sampoytech.shopaholic;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Time;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ProductConnection extends Connection {
@@ -20,7 +16,7 @@ public class ProductConnection extends Connection {
 	{
 		f+=".txt";
 		this.file=new File(f);
-		PrintWriter pw=new PrintWriter(new FileWriter(this.file,true));
+		//PrintWriter pw=new PrintWriter(new FileWriter(this.file,true));
 		Scanner sc=new Scanner(file);
 		productArrayList=new ArrayList<Product>();
 		String temp;

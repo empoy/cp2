@@ -3,26 +3,19 @@ package com.sampoytech.shopaholic;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 public class UserAdder {
 
 	private JFrame frame;
 	static String Log;
-	private JPanel contentPane;
 	private JTextField txtID;
 	private JTextField txtUsername;
 	private JTextField txtPassword;

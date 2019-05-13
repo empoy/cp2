@@ -1,10 +1,6 @@
 package com.sampoytech.shopaholic;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +10,7 @@ import java.util.Scanner;
 public class UserConnection extends Connection {
 
 	
-private String id,username,password,name,surname,accessLevel,number,address;
+	private String id,username,password,name,surname,accessLevel,number,address;
 	
 	String f="Login.txt";
 	String tempF="Login_temp.txt";
