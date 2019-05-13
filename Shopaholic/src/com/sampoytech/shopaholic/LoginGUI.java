@@ -12,11 +12,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JPanel;
 import javax.swing.Box;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
 
 public class LoginGUI {
 
@@ -51,46 +51,29 @@ public class LoginGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmLogin = new JFrame();
-		frmLogin.setTitle("Login");
-		frmLogin.setBounds(100, 100, 463, 352);
-		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmLogin.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		frmLogin = new JFrame("MigLayout");
+		frmLogin.getContentPane().setBackground(Color.WHITE);
 		
-		JPanel usernamePanel = new JPanel();
+		frmLogin.setTitle("Login");
+		frmLogin.setBounds(100, 100, 531, 384);
+		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Box verticalBox = Box.createVerticalBox();
+		
+		username = new JTextField();
+		username.setColumns(15);
 		//frmLogin.getContentPane().add(usernamePanel);
 		
 		JLabel lblUsername = new JLabel("Username:");
-		usernamePanel.add(lblUsername);
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		username = new JTextField();
-		usernamePanel.add(username);
-		username.setColumns(15);
-		
-		Box verticalBox = Box.createVerticalBox();
-		frmLogin.getContentPane().add(verticalBox);
-		
-		verticalBox.add(usernamePanel);
-		
-		JPanel passwordPanel = new JPanel();
-		//frmLogin.getContentPane().add(passwordPanel);
-		
-		verticalBox.add(passwordPanel);
-		
 		JLabel lblPassword = new JLabel("Password:");
-		passwordPanel.add(lblPassword);
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		password = new JPasswordField();
-		passwordPanel.add(password);
 		password.setColumns(15);
 		
-		JPanel btnPanel = new JPanel();
-		frmLogin.getContentPane().add(btnPanel);
-		
 		JButton btnLogin = new JButton("Login");
-		btnPanel.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				User u=new User();
@@ -132,5 +115,46 @@ public class LoginGUI {
 				}
 			}
 		});
+		GroupLayout groupLayout = new GroupLayout(frmLogin.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(80)
+							.addComponent(verticalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(52)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblPassword)
+								.addComponent(lblUsername))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(password)
+								.addComponent(username))))
+					.addGap(79))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(214)
+					.addComponent(btnLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(208))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(63)
+					.addComponent(verticalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(username, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblUsername))
+					.addGap(21)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblPassword))
+					.addGap(18)
+					.addComponent(btnLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(100))
+		);
+		frmLogin.getContentPane().setLayout(groupLayout);
 	}
 }
