@@ -1,7 +1,10 @@
 package com.sampoytech.shopaholic;
 
 import java.awt.EventQueue;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -56,6 +59,13 @@ public class SellerGUI {
 	 * @throws ParseException 
 	 */
 	private void initialize() throws IOException, ParseException {
+		File f=new File(log+".txt");
+		if (f.exists()!=true)
+		{
+			PrintWriter pw=new PrintWriter(new FileWriter(f),true);
+			pw.close();
+		}
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 919, 719);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
